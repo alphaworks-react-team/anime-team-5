@@ -8,13 +8,11 @@ const Image = styled.img`
 `;
 
 const SlideTitle = styled.h3`
-
   position: absolute;
-  visibility: ${(props) => (props.show === true ? "visible" : "hidden")}
-    display: flex;
-    margin: 0;
-    color: white;
-    background: rgba(1, 1, 1, 0.5);
+  display: ${(props) => (props.shown === true ? "flex" : "none")};
+  margin: 0;
+  color: white;
+  background: rgba(1, 1, 1, 0.5);
 `;
 
 const SlideImage = (props) => {
