@@ -7,10 +7,23 @@ import Manga from "./Pages/Manga";
 import AppContainer from "./Fragments/AppContainer";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import styled from "styled-components";
+
+const Card = styled.div`
+  width: 50%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  border-radius: 5px;
+`;
+
+const H2 = styled.h2`
+
+`
+
 function App() {
   const [animeState, setAnimeState] = useState([]);
 
-  const search = (name) => {
+  const searchApi = (name) => {
     axios
       .get(`https://kitsu.io/api/edge/anime/?filter[text]=${name}`)
       .then((res) => {
@@ -19,17 +32,13 @@ function App() {
       .catch((err) => console.log(err));
   };
 
-  useEffect(() => {
-    search("Naruto");
-  }, []);
-
   return (
     <AppContainer className="App">
-      {/* {animeState.map((element) => (
-        <h1>{element.id}</h1>
+      {/* {animeState.map((element, index) => (
+        <h2 key={index}>{element.attributes.titles.en}</h2>
       ))} */}
       <Router>
-        <Nav />
+        <Nav searchApi={searchApi} setAnimeState={setAnimeState} />
         <Switch>
           <Route exact path="/">
             <Home />
@@ -42,6 +51,18 @@ function App() {
           </Route>
         </Switch>
       </Router>
+      {animeState.map((element, index) => (
+        <Card>
+          <H2 key={index}>{element.attributes.titles.en}</H2>
+          <img src={element.attributes.coverImage.small} alt="Logo" />
+          <h3 key={index}>
+            Average Rating
+            <br />
+            {element.attributes.averageRating}
+          </h3>
+          <p>{element.attributes.synopsis}</p>
+        </Card>
+      ))}
     </AppContainer>
   );
 }

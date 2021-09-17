@@ -1,15 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import NavContainer from "./../Fragments/NavContainer";
-import Search  from "./Search";
+import Search from "./Search";
 
-const Nav = () => {
+const Nav = (props) => {
   return (
     <NavContainer>
       <Link to="/">Home</Link>
       <Link to="/anime">Anime</Link>
       <Link to="/manga">Manga</Link>
-      <Search/>
+      <Search searchApi={props.searchApi} setAnimeState={props.setAnimeState} />
     </NavContainer>
   );
 };
