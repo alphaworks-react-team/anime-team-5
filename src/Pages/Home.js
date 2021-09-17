@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Container from "./../Fragments/Container";
 
 const Home = ({ children }) => {
