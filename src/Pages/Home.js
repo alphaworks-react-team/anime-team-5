@@ -1,8 +1,8 @@
 import React from "react";
-import Container from "./../Fragments/Container";
+import MainContainer from "../Fragments/MainContainer";
 
 const Home = ({ children }) => {
-  return <Container>{children}Hello from Home</Container>;
+  return <MainContainer>{children}Hello from Home</MainContainer>;
 };
 
 export default Home;
