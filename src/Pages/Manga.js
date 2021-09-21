@@ -1,8 +1,8 @@
 import React from "react";
-import Container from "./../Fragments/Container";
+import MainContainer from "./../Fragments/MainContainer";
 
 const Manga = () => {
-  return <Container>Hello from Manga</Container>;
+  return <MainContainer>Hello from Manga</MainContainer>;
 };
 
 export default Manga;
