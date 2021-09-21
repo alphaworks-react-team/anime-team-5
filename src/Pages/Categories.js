@@ -1,12 +1,12 @@
-import Container from "./../Fragments/Container";
 import Card from "./../Fragments/Card";
+import MainContainer from "./../Fragments/MainContainer";
 
 const Categories = (props) => {
   return (
     <div>
-      <Container>
+      <MainContainer>
         <Card>Hello from Categories</Card>
-      </Container>
+      </MainContainer>
       ;
     </div>
   );

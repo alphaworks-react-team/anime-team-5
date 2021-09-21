@@ -8,7 +8,6 @@ import AppContainer from "./Fragments/AppContainer";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
-
 import Categories from "./Pages/Categories";
 import Card from "./Fragments/Card";
 
@@ -19,16 +18,7 @@ const Img = styled.img`
   border-radius: 5px;
 `;
 
-const Card = styled.div`
-  width: 50%;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  transition: 0.3s;
-  border-radius: 5px;
-`;
-
-const H2 = styled.h2`
-
-`
+const H2 = styled.h2``;
 
 function App() {
   const [animeState, setAnimeState] = useState([]);
@@ -42,7 +32,6 @@ function App() {
       })
       .catch((err) => console.log(err));
   };
-
 
   const catApi = () => {
     console.log("hello");
@@ -71,7 +60,6 @@ function App() {
     // catApi();
   }, []);
 
-
   return (
     <AppContainer className="App">
       {/* {animeState.map((element, index) => (
@@ -96,7 +84,6 @@ function App() {
       </Router>
       {animeState.map((element, index) => (
         <Card>
-
           <h2 key={index}>{element.attributes.titles.en}</h2>
           <Img src={element.attributes.coverImage?.original} alt="Logo" />
           <h4 key={index}>
