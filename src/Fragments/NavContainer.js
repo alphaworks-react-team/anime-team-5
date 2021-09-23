@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const NavContainer = styled.div`
-  height: 10vh;
+  min-height: 10vh;
   width: 100vw;
   display: flex;
   flex-flow: row;
