@@ -3,13 +3,24 @@ import styled from "styled-components";
 import ExploreCardContainer from "../Fragments/ExploreCardContainer";
 import StyledLink from "./../Fragments/StyledLink";
 
+const Header = styled.div`
+  width: 100%;
+  padding-bottom: 10px;
+  margin-bottom: 12px;
+  border-bottom: 0.2px solid lightgrey;
+  box-sizing: border-box;
+`;
+
 const Title = styled.h1`
   width: 100%;
   margin: 0;
-  padding-bottom: 10px;
-  margin-bottom: 8px;
-  border-bottom: 0.2px solid lightgrey;
-  box-sizing: border-box;
+  padding-bottom: 5px;
+`;
+
+const Description = styled.p`
+  width: 100%;
+  margin: 0;
+  padding-bottom: 5px;
 `;
 
 const CardImage = styled.img`
@@ -64,7 +75,12 @@ const MoreDetailsButton = styled.div`
   cursor: pointer;
 `;
 
-const CurrentExplorer = ({ title, current = [], setActiveCategory }) => {
+const CurrentExplorer = ({
+  title,
+  current = [],
+  setActiveCategory,
+  description,
+}) => {
   const [show, setShow] = useState(false);
   const [animeIndex, setAnimeIndex] = useState(-1);
 
@@ -84,7 +100,10 @@ const CurrentExplorer = ({ title, current = [], setActiveCategory }) => {
   return (
     <ExploreCardContainer>
       <GoBackButton onClick={() => setActiveCategory({})}>Go Back</GoBackButton>
-      <Title>{title}</Title>
+      <Header>
+        <Title>{title}</Title>
+        <Description>{description}</Description>
+      </Header>
       <CardImageRow>
         {current.map((anime, index) => (
           <CardImageContainer
