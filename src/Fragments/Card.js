@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-      const Card = styled.div`
+const Card = styled.div`
   width: 80%;
   box-shadow: 0 4px 8px 0 rgba(22, 114, 51, 0.34);
   transition: 0.3s;
@@ -15,4 +15,4 @@ import styled from "styled-components";
   // grid-row-gap: 27px;
 `;
 
-export default Card
+export default Card;

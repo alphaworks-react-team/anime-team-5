@@ -1,25 +1,103 @@
 import React, { useEffect, useState } from "react";
-import Container from "./../Fragments/Container";
-import { getTrending } from "../utils";
-import Carousel from "../Components/Carousel";
+import MainContainer from "../Fragments/MainContainer";
+import {
+  getNew,
+  getTrending,
+  getPopular,
+  getHighestRated,
+  getAnimeByCategory,
+  getCategories,
+} from "../utils";
+import ExploreCard from "./../Components/ExploreCard";
+import ExploreContainer from "../Fragments/ExploreContainer";
+import CategoryContainer from "../Fragments/CategoryContainer";
+import ExploreCardContainer from "../Fragments/ExploreCardContainer";
+import CategoryBox from "../Components/CategoryBox";
+import styled from "styled-components";
+import CurrentExplorer from "../Components/CurrentExplorer";
+import axios from "axios";
 
-const Anime = () => {
+const CategorySubContainer = styled.div`
+  border: 0.2px solid lightgrey;
+  box-sizing: border-box;
+  padding: 10px;
+`;
+
+const Anime = ({ searchedAnime, name }) => {
   const [trending, setTrending] = useState([]);
+  const [newAnime, setNewAnime] = useState([]);
+  const [popular, setPopular] = useState([]);
+  const [highestRated, setHighestRated] = useState([]);
+  const [activeCategory, setActiveCategory] = useState({});
+  const [categories, setCategories] = useState([]);
+
+  const searchAnime = () => {
+    // if (activeCategory.data === undefined) {
+    //   return null;
+    // }
+    setActiveCategory({
+      data: searchedAnime,
+      name: name,
+    });
+  };
+  useEffect(() => {
+    searchAnime();
+  }, [searchedAnime]);
 
   useEffect(() => {
     getTrending(setTrending);
-  }, []);
+    getNew(setNewAnime);
+    getPopular(setPopular);
+    getHighestRated(setHighestRated);
+    getCategories(setCategories);
+  }, [activeCategory]);
+
+  const onClick = async (str) => {
+    console.log(str);
+    const results = await getAnimeByCategory(str);
+    setActiveCategory({ data: results, name: str });
+  };
 
   return (
-    <Container>
-      <Carousel anime={trending} />
-      {/* {trending.map((anime, index) => (
-        <div key={index}>
-          <h3>{anime.attributes.titles.en}</h3>
-          <img src={anime.attributes.posterImage.small} alt="" />
-        </div>
-      ))} */}
-    </Container>
+    <MainContainer>
+      <CategoryContainer>
+        <CategorySubContainer>
+          <CategoryBox title="Categories" tags={categories} onClick={onClick} />
+        </CategorySubContainer>
+      </CategoryContainer>
+      <ExploreContainer>
+        {activeCategory.data === undefined ? (
+          <ExploreCardContainer>
+            <ExploreCard
+              title="Trending"
+              anime={trending}
+              setActiveCategory={setActiveCategory}
+            />
+            <ExploreCard
+              title="Most Popular Anime"
+              anime={popular}
+              setActiveCategory={setActiveCategory}
+            />
+            <ExploreCard
+              title="Highest Rated Anime"
+              anime={highestRated}
+              setActiveCategory={setActiveCategory}
+            />
+            <ExploreCard
+              title="New Anime"
+              anime={newAnime}
+              setActiveCategory={setActiveCategory}
+            />
+          </ExploreCardContainer>
+        ) : (
+          <CurrentExplorer
+            title={activeCategory.name}
+            current={activeCategory.data}
+            setActiveCategory={setActiveCategory}
+          />
+        )}
+      </ExploreContainer>
+    </MainContainer>
   );
 };
 
