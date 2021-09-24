@@ -15,6 +15,7 @@ import ExploreCardContainer from "../Fragments/ExploreCardContainer";
 import CategoryBox from "../Components/CategoryBox";
 import styled from "styled-components";
 import CurrentExplorer from "../Components/CurrentExplorer";
+import axios from "axios";
 
 const CategorySubContainer = styled.div`
   border: 0.2px solid lightgrey;
@@ -23,13 +24,26 @@ const CategorySubContainer = styled.div`
   border-radius: 5px;
 `;
 
-const Anime = () => {
+const Anime = ({ searchedAnime, name }) => {
   const [trending, setTrending] = useState([]);
   const [newAnime, setNewAnime] = useState([]);
   const [popular, setPopular] = useState([]);
   const [highestRated, setHighestRated] = useState([]);
   const [activeCategory, setActiveCategory] = useState({});
   const [categories, setCategories] = useState([]);
+
+  const searchAnime = () => {
+    // if (activeCategory.data === undefined) {
+    //   return null;
+    // }
+    setActiveCategory({
+      data: searchedAnime,
+      name: name,
+    });
+  };
+  useEffect(() => {
+    searchAnime();
+  }, [searchedAnime]);
 
   useEffect(() => {
     getTrending(setTrending);
