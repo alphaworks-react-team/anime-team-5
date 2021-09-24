@@ -12,7 +12,6 @@ import Categories from "./Pages/Categories";
 import Card from "./Fragments/Card";
 import AnimeDetails from "./Pages/AnimeDetails";
 import Episodes from "./Components/Episodes";
-import Trending from "./Pages/Trending";
 
 const Img = styled.img`
   height: 200px;
@@ -76,7 +75,6 @@ function App() {
           </Route>
           <Route path="/anime/details/:id/episodes" component={Episodes} />
           <Route path="/anime/details/:id" component={AnimeDetails} />
-          <Route path="/anime/trending" component={Trending} />
           <Route path="/anime">
             <Anime />
           </Route>
