@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import NavContainer from "./../Fragments/NavContainer";
 import Search from "./Search";
 
-import  Categories  from "./../Pages/Categories";
-
+import Categories from "./../Pages/Categories";
 
 const Nav = (props) => {
   return (

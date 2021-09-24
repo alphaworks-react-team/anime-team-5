@@ -38,9 +38,11 @@ function App() {
   };
 
   useEffect(() => {
-    let one = `https://kitsu.io/api/edge/anime?filter[categories]=action`;
+    let one = `https://kitsu.io/api/edge/anime?filter[categories]=Action`;
     let two = `https://kitsu.io/api/edge/anime?filter[categories]=Space`;
     let three = `https://kitsu.io/api/edge/anime?filter[categories]=Ninja`;
+    let four = `https://kitsu.io/api/edge/anime?filter[categories]=Adventure`;
+    let five = `https://kitsu.io/api/edge/anime?filter[categories]=Drama`;
 
     axios
       .get(one)
@@ -55,6 +57,16 @@ function App() {
     axios
       .get(three)
       .then((res) => console.log("three ====>", res))
+      .catch((err) => console.log(err));
+
+    axios
+      .get(four)
+      .then((res) => console.log("four ====>", res))
+      .catch((err) => console.log(err));
+
+    axios
+      .get(five)
+      .then((res) => console.log("five ====>", res))
       .catch((err) => console.log(err));
 
     // catApi();
@@ -85,7 +97,7 @@ function App() {
       {animeState.map((element, index) => (
         <Card>
           <h2 key={index}>{element.attributes.titles.en}</h2>
-          <Img src={element.attributes.coverImage?.original} alt="Logo" />
+          <Img src={element.attributes.coverImage?.original} alt="" />
           <h4 key={index}>
             Average Rating
             <br />
