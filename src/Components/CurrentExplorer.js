@@ -1,18 +1,15 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import ExploreCardContainer from "../Fragments/ExploreCardContainer";
 import StyledLink from "./../Fragments/StyledLink";
 
-const CardContainer = styled.div`
+const Title = styled.h1`
   width: 100%;
-  display: flex;
-  flex-flow: column;
-  box-sizing: border-box;
-  margin-bottom: 10px;
-`;
-
-const CardHeader = styled.h3`
   margin: 0;
-  margin-bottom: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 8px;
+  border-bottom: 0.2px solid lightgrey;
+  box-sizing: border-box;
 `;
 
 const CardImage = styled.img`
@@ -22,10 +19,9 @@ const CardImage = styled.img`
 
 const CardImageRow = styled.div`
   display: flex;
-  flex-flow: row;
+  flex-flow: row wrap;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
 `;
 
 const CardImageContainer = styled.div`
@@ -35,9 +31,10 @@ const CardImageContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   position: relative;
+  margin-bottom: 10px;
 `;
 
-const ViewMoreButton = styled.div`
+const GoBackButton = styled.div`
   width: 100%;
   font-size: 12px;
   text-align: right;
@@ -67,7 +64,7 @@ const MoreDetailsButton = styled.div`
   cursor: pointer;
 `;
 
-const ExploreCard = ({ title, anime = [], setActiveCategory }) => {
+const CurrentExplorer = ({ title, current = [], setActiveCategory }) => {
   const [show, setShow] = useState(false);
   const [animeIndex, setAnimeIndex] = useState(-1);
 
@@ -84,38 +81,31 @@ const ExploreCard = ({ title, anime = [], setActiveCategory }) => {
     setShow(true);
   };
 
-  const animePreview = (anime) => {
-    const preview = [...anime];
-    return preview.splice(0, 5).map((anime, index) => (
-      <CardImageContainer
-        key={index}
-        onMouseEnter={() => showIndex(index)}
-        onMouseLeave={() => setShow(false)}
-      >
-        <CardImage
-          src={anime.attributes.posterImage.medium}
-          alt={anime.attributes.titles.en}
-        />
-        {index === animeIndex && (
-          <MoreDetailsContainer shown={show}>
-            {moreDetailButton(anime.id)}
-          </MoreDetailsContainer>
-        )}
-      </CardImageContainer>
-    ));
-  };
-
   return (
-    <CardContainer>
-      <CardHeader>{title}</CardHeader>
-      <CardImageRow>{animePreview(anime)}</CardImageRow>
-      <ViewMoreButton
-        onClick={() => setActiveCategory({ data: anime, name: title })}
-      >
-        View More
-      </ViewMoreButton>
-    </CardContainer>
+    <ExploreCardContainer>
+      <GoBackButton onClick={() => setActiveCategory({})}>Go Back</GoBackButton>
+      <Title>{title}</Title>
+      <CardImageRow>
+        {current.map((anime, index) => (
+          <CardImageContainer
+            key={index}
+            onMouseEnter={() => showIndex(index)}
+            onMouseLeave={() => setShow(false)}
+          >
+            <CardImage
+              src={anime.attributes.posterImage.medium}
+              alt={anime.attributes.titles.en}
+            />
+            {index === animeIndex && (
+              <MoreDetailsContainer shown={show}>
+                {moreDetailButton(anime.id)}
+              </MoreDetailsContainer>
+            )}
+          </CardImageContainer>
+        ))}
+      </CardImageRow>
+    </ExploreCardContainer>
   );
 };
 
-export default ExploreCard;
+export default CurrentExplorer;

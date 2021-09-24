@@ -8,7 +8,7 @@ const headers = {
 export const getTrending = async (setTrending) => {
   try {
     const result = await axios.get(
-      "https://kitsu.io/api/edge/trending/anime/?[limit]=5&[offset]=0",
+      "https://kitsu.io/api/edge/trending/anime/?[limit]=206&[offset]=0",
       {
         headers: headers,
       }
@@ -23,7 +23,7 @@ export const getTrending = async (setTrending) => {
 export const getNew = async (setNewAnime) => {
   try {
     const result = await axios.get(
-      "https://kitsu.io/api/edge/anime/?sort=-createdAt,popularityRank&page[limit]=5&[offset]=0",
+      "https://kitsu.io/api/edge/anime/?sort=-createdAt,popularityRank&page[limit]=20&[offset]=0",
       {
         headers: headers,
       }
@@ -38,7 +38,7 @@ export const getNew = async (setNewAnime) => {
 export const getPopular = async (setPopular) => {
   try {
     const result = await axios.get(
-      "https://kitsu.io/api/edge/anime/?sort=popularityRank&page[limit]=5&[offset]=0",
+      "https://kitsu.io/api/edge/anime/?sort=popularityRank&page[limit]=20&[offset]=0",
       {
         headers: headers,
       }
@@ -53,7 +53,7 @@ export const getPopular = async (setPopular) => {
 export const getHighestRated = async (setHighestRated) => {
   try {
     const result = await axios.get(
-      "https://kitsu.io/api/edge/anime/?sort=ratingRank&page[limit]=5&[offset]=0",
+      "https://kitsu.io/api/edge/anime/?sort=ratingRank&page[limit]=20&[offset]=0",
       {
         headers: headers,
       }
@@ -83,7 +83,7 @@ export const getAnimeById = async (id) => {
 export const getAnimeGenresById = async (id) => {
   try {
     const result = await axios.get(
-      `https://kitsu.io/api/edge/anime/${id}/genres/?page[limit]=20`,
+      `https://kitsu.io/api/edge/anime/${id}/genres/?page[limit]=250`,
       {
         headers: headers,
       }
@@ -98,7 +98,7 @@ export const getAnimeGenresById = async (id) => {
 export const getAnimeCategoriesById = async (id) => {
   try {
     const result = await axios.get(
-      `https://kitsu.io/api/edge/anime/${id}/categories/?page[limit]=20`,
+      `https://kitsu.io/api/edge/anime/${id}/categories/?page[limit]=250`,
       {
         headers: headers,
       }
@@ -193,6 +193,34 @@ export const getLinks = async (id) => {
   try {
     const result = await axios.get(
       `https://kitsu.io/api/edge/anime/${id}/streaming-links/?page[limit]=20`,
+      {
+        headers: headers,
+      }
+    );
+    return result.data.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getCategories = async (setCategories) => {
+  try {
+    const result = await axios.get(
+      `https://kitsu.io/api/edge/categories/?page[limit]=250`,
+      {
+        headers: headers,
+      }
+    );
+    setCategories(result.data.data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getAnimeByCategory = async (name) => {
+  try {
+    const result = await axios.get(
+      `https://kitsu.io/api/edge/anime?filter[categories]=${name}&page[limit]=20`,
       {
         headers: headers,
       }
