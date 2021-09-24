@@ -20,6 +20,7 @@ const CategorySubContainer = styled.div`
   border: 0.2px solid lightgrey;
   box-sizing: border-box;
   padding: 10px;
+  border-radius: 5px;
 `;
 
 const Anime = () => {
@@ -38,10 +39,10 @@ const Anime = () => {
     getCategories(setCategories);
   }, [activeCategory]);
 
-  const onClick = async (str) => {
-    console.log(str);
-    const results = await getAnimeByCategory(str);
-    setActiveCategory({ data: results, name: str });
+  const onClick = async (name, description) => {
+    console.log(name, description);
+    const results = await getAnimeByCategory(name);
+    setActiveCategory({ data: results, name: name, description: description });
   };
 
   return (
@@ -80,6 +81,7 @@ const Anime = () => {
             title={activeCategory.name}
             current={activeCategory.data}
             setActiveCategory={setActiveCategory}
+            description={activeCategory.description}
           />
         )}
       </ExploreContainer>

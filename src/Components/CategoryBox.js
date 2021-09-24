@@ -49,7 +49,12 @@ const CategoryBox = ({ title, tags = [], onClick }) => {
       <Title>{title}</Title>
       <TagContainer>
         {tags.map((tag, index) => (
-          <Tag onClick={() => onClick(tag.attributes.title)} key={index}>
+          <Tag
+            onClick={() =>
+              onClick(tag.attributes.title, tag.attributes.description)
+            }
+            key={index}
+          >
             {tag.attributes.title}
           </Tag>
         ))}
